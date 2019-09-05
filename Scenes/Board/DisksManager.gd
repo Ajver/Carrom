@@ -5,12 +5,10 @@ var MainDisk = load("res://Scenes/Disks/MainDisk.tscn")
 
 const DISKS_COLORS = [
 	Color8(204, 204, 204),
-	Color8(61, 61, 61)
+	Color8(61, 61, 61),
+	Color8(112, 7, 7)
 ]
 
-var disks_pool : Array = []
-var foo : Array = []
-var main_disk = null
 var has_main_disk : bool = false
 
 const DISK_D : float = 30.0
@@ -18,53 +16,44 @@ const MIN_DISK_SPEED : float = 0.05
 
 var in_prepare_mode = true
 
-func _ready() -> void:
-	hide()
-	create_disks()
-	
-func create_disks() -> void:
-	for i in range(19):
-		var disk = Disk.instance()
-		disks_pool.append(disk)
-		disk.modulate = DISKS_COLORS[i%2]
-		
-	main_disk = MainDisk.instance()
-
 func new_game() -> void:
-	get_all_disks_from_pool()
-	set_disks_start_position()
-	show()
+	remove_all_children()
+	call_deferred("register_new_disks")
+	#register_new_disks()
 	
-func set_disks_start_position() -> void:
-	get_child(0).position = Vector2.ZERO
-
+func remove_all_children() -> void:
+	for disk in get_children():
+		disk.queue_free()
+	
+func register_new_disks() -> void:
 	var SQRT_3 = 1.732
 	
-	set_position_of_6_disks(1, DISK_D, 0.0)
-	set_position_of_6_disks(7, DISK_D*2, 0.0)
-	set_position_of_6_disks(13, DISK_D * SQRT_3, PI / 6.0)
+	create_disk(Vector2.ZERO, DISKS_COLORS[2])
+	create_6_disks(DISK_D, 0.0)
+	create_6_disks(DISK_D*2, 0.0)
+	create_6_disks(DISK_D * SQRT_3, PI / 6.0)
 	
+	var main_disk = MainDisk.instance()
+	add_child(main_disk)
 	main_disk.position = Vector2(0, DISK_D * 5)
-	main_disk.collision_layer = 1
 	
-func set_position_of_6_disks(from:int, R:float, angle:float):
+func create_6_disks(R:float, angle:float):
 	var PI_OVER_3 = PI / 3.0
 	
-	for i in range(from, from+6):
-		var disk = get_child(i)
+	for i in range(6):
 		var disk_x = sin(angle) * R
 		var disk_y = cos(angle) * R
-		disk.position = Vector2(disk_x, disk_y)
-		angle += PI_OVER_3
-	
-func get_all_disks_from_pool() -> void:
-	for i in range(disks_pool.size()):
-		add_child(disks_pool.pop_back())
 		
-	if not has_main_disk:
-		main_disk.collision_layer = 0
-		add_child(main_disk)
-		has_main_disk = true
+		create_disk(Vector2(disk_x, disk_y), DISKS_COLORS[i%2])
+		
+		angle += PI_OVER_3
+		
+func create_disk(disk_position, disk_modulate):
+	var disk = Disk.instance()
+	add_child(disk)
+	disk.modulate = disk_modulate
+	disk.set_disk_manager(self)
+	disk.position = disk_position
 		
 func _process(delta):
 	if in_prepare_mode:
@@ -74,7 +63,7 @@ func _process(delta):
 		if disk.linear_velocity.length() > MIN_DISK_SPEED:
 			return
 			
-	enter_preapare_mode()
+	enter_prepare_mode()
 		
 func make_everything_rigid() -> void:
 	for disk in get_children():
@@ -83,10 +72,12 @@ func make_everything_rigid() -> void:
 	yield(get_tree().create_timer(0.1), "timeout")
 	in_prepare_mode = false
 	
-func enter_preapare_mode() -> void:
+func enter_prepare_mode() -> void:
 	for disk in get_children():
-		disk.enter_preapare_mode()
+		disk.enter_prepare_mode()
 	
 	in_prepare_mode = true
-	
-	
+
+func disk_reached(disk) -> void:
+	#call_deferred("remove_child", disk)
+	pass

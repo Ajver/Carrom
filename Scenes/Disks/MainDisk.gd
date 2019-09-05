@@ -42,8 +42,10 @@ func _physics_process(delta) -> void:
 		
 	var areas = area.get_overlapping_areas()
 	if areas.size() == 0:
-		global_position = area.global_position
-		area.position = Vector2.ZERO
+		var bodies = area.get_overlapping_bodies()
+		if bodies.size() == 0:
+			global_position = area.global_position
+			area.position = Vector2.ZERO
 	
 func _on_Mouse_entered() -> void:
 	is_mouse_in = true
@@ -64,7 +66,13 @@ func _on_Mouse_exited() -> void:
 		modulate = COLORS[0]
 	pointer.show()
 
+func _on_Area2D_body_entered(body):
+	_on_wrong_area_entered()
+	
 func _on_Area2D_area_entered(area) -> void:
+	_on_wrong_area_entered()
+
+func _on_wrong_area_entered() -> void:
 	if mode == MODE_RIGID:
 		return
 		
@@ -74,7 +82,7 @@ func make_rigid() -> void:
 	mode = MODE_RIGID
 	pointer.hide()
 	
-func enter_preapare_mode() -> void:
+func enter_prepare_mode() -> void:
 	mode = MODE_KINEMATIC
 	
 	if not is_mouse_in:

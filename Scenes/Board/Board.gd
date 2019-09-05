@@ -7,9 +7,10 @@ func _ready() -> void:
 
 func new_game() -> void:
 	disk_manager.new_game()
-
+	
 func _input(event) -> void:
 	if Input.is_key_pressed(KEY_S):
+		disk_manager.enter_prepare_mode()
 		new_game()
 		
 func make_everything_rigid() -> void:

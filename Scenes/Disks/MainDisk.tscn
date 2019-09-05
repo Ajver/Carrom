@@ -35,7 +35,7 @@ shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 18
+collision_mask = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
@@ -76,5 +76,6 @@ offset = Vector2( -0.5, 0 )
 [node name="StringStartPosition" type="Position2D" parent="Pointer"]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Mouse_exited"]
