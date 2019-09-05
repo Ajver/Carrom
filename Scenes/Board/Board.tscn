@@ -41,3 +41,4 @@ texture = ExtResource( 4 )
 [node name="DisksManager" type="Node2D" parent="."]
 visible = false
 script = ExtResource( 5 )
+

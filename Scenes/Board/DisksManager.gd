@@ -62,3 +62,10 @@ func get_all_disks_from_pool() -> void:
 		main_disk.collision_layer = 0
 		add_child(main_disk)
 		has_main_disk = true
+		
+func make_everything_rigid() -> void:
+	for disk in get_children():
+		disk.make_rigid()
+	
+	
+	

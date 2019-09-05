@@ -4,6 +4,7 @@ var is_holded = false
 var is_mouse_in = false
 
 onready var area = $Area2D
+onready var pointer = $Pointer
 
 var previous_position : Vector2
 
@@ -12,7 +13,7 @@ var COLORS = [
 	Color8(110, 237, 182)
 ]
 
-func _input(event):
+func _input(event) -> void:
 	if mode == MODE_RIGID:
 		return
 		
@@ -30,7 +31,7 @@ func _input(event):
 		if Input.is_action_just_pressed("grab"):
 			is_holded = true
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	previous_position = global_position
 	
 	if area.position == Vector2.ZERO:
@@ -41,14 +42,19 @@ func _physics_process(delta):
 		global_position = area.global_position
 		area.position = Vector2.ZERO
 	
-func _on_Mouse_entered():
+func _on_Mouse_entered() -> void:
 	is_mouse_in = true
 	modulate = COLORS[1]
+	pointer.hide()
 
-func _on_Mouse_exited():
+func _on_Mouse_exited() -> void:
 	is_mouse_in = false
 	if not is_holded:
 		modulate = COLORS[0]
+	pointer.show()
 
-func _on_Area2D_area_entered(area):
+func _on_Area2D_area_entered(area) -> void:
 	global_position = previous_position
+
+func make_rigid() -> void:
+	mode = MODE_RIGID
