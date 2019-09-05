@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Disks/Disk.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Disks/MainDisk.gd" type="Script" id=2]
+[ext_resource path="res://circle.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 20.0
+
+[node name="MainDisk" index="0" instance=ExtResource( 1 )]
+mode = 3
+contacts_reported = 10
+contact_monitor = true
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color( 0.431373, 0.929412, 0.905882, 1 )
+scale = Vector2( 0.2, 0.2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Area2D" index="1"]
+modulate = Color( 0.223529, 0.0313726, 0.329412, 0.733333 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+[connection signal="mouse_entered" from="." to="." method="_on_Mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_Mouse_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_Mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_Mouse_exited"]
