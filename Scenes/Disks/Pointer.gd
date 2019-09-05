@@ -57,5 +57,3 @@ func shot():
 	
 	board.make_everything_rigid()
 	main_disk.apply_central_impulse(impulse)
-	
-	print("Shot: ", string_strengt)

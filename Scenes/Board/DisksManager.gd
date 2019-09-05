@@ -74,7 +74,6 @@ func _process(delta):
 		if disk.linear_velocity.length() > MIN_DISK_SPEED:
 			return
 			
-	print("STOPPED")
 	enter_preapare_mode()
 		
 func make_everything_rigid() -> void:
@@ -83,9 +82,7 @@ func make_everything_rigid() -> void:
 		
 	yield(get_tree().create_timer(0.1), "timeout")
 	in_prepare_mode = false
-	print("prepare?")
 	
-		
 func enter_preapare_mode() -> void:
 	for disk in get_children():
 		disk.enter_preapare_mode()
