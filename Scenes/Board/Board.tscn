@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Board/Board.gd" type="Script" id=1]
 [ext_resource path="res://OnePixel.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Board/Corner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://circle.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Board/DisksManager.gd" type="Script" id=5]
+
+[sub_resource type="PhysicsMaterial" id=3]
+bounce = 0.8
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 465, 65 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 90, 300 )
 
 [node name="Board" type="Node2D"]
 position = Vector2( 512, 300 )
@@ -41,4 +50,25 @@ texture = ExtResource( 4 )
 [node name="DisksManager" type="Node2D" parent="."]
 visible = false
 script = ExtResource( 5 )
+
+[node name="Edges" type="StaticBody2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+physics_material_override = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Edges"]
+position = Vector2( -12, -365 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Edges"]
+position = Vector2( 8, 365 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Edges"]
+position = Vector2( 388, 0 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Edges"]
+position = Vector2( -392, 0 )
+shape = SubResource( 2 )
 

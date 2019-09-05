@@ -3,12 +3,12 @@ extends Node2D
 onready var board = get_node("/root/Board")
 onready var main_disk = get_parent() 
 onready var spring = $SpringBase/Spring
+onready var string_start_position = $StringStartPosition 
 
 var is_stringing : bool = false
-var string_start_position : Vector2
 
-var MAX_STRENGHT : float = 100.0
-var STRENGHT_MOD : float = 20.0
+var MAX_STRENGHT : float = 200.0
+var STRENGHT_MOD : float = 10.0
 
 func _input(event):
 	if not visible:
@@ -26,7 +26,7 @@ func _input(event):
 			is_stringing = false
 			spring.scale.y = 0
 	elif Input.is_action_just_pressed("grab"):
-		string_start_position = event.position
+		string_start_position.global_position = event.position
 		is_stringing = true
 		
 func _process(delta):
@@ -37,7 +37,7 @@ func _process(delta):
 	
 func get_string_strenght() -> float:
 	var mouse_position = get_viewport().get_mouse_position()
-	var diff = string_start_position - mouse_position
+	var diff = string_start_position.global_position - mouse_position
 	return min(diff.length(), MAX_STRENGHT)
 			
 func shot():
