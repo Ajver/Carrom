@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scenes/Disks/MainDisk.gd" type="Script" id=1]
-[ext_resource path="res://circle.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/Disks/Pointer.gd" type="Script" id=3]
-[ext_resource path="res://OnePixel.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Disks/DiskPhysicsMaterial.tres" type="PhysicsMaterial" id=1]
+[ext_resource path="res://Scenes/Disks/MainDisk.gd" type="Script" id=2]
+[ext_resource path="res://circle.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Disks/Pointer.gd" type="Script" id=4]
+[ext_resource path="res://OnePixel.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0
@@ -19,14 +20,15 @@ collision_layer = 4
 collision_mask = 34
 mode = 3
 mass = 0.89
+physics_material_override = ExtResource( 1 )
 continuous_cd = 2
-linear_damp = 1.0
+linear_damp = 4.0
 angular_damp = 1.0
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -39,35 +41,35 @@ collision_mask = 18
 shape = SubResource( 2 )
 
 [node name="Pointer" type="Node2D" parent="."]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="Arrow" type="Sprite" parent="Pointer"]
 position = Vector2( 0, -50 )
 rotation = 0.785398
 scale = Vector2( 5, 5 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="Pointer/Arrow"]
 position = Vector2( 1.5, 1.5 )
 rotation = -0.785398
 scale = Vector2( 0.5, 5 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="Sprite2" type="Sprite" parent="Pointer/Arrow"]
 position = Vector2( 3.4, 3.4 )
 rotation = -0.785398
 scale = Vector2( 2, 0.5 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="SpringBase" type="Sprite" parent="Pointer"]
 position = Vector2( 0, 25 )
 scale = Vector2( 10, 3 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="Spring" type="Sprite" parent="Pointer/SpringBase"]
 position = Vector2( 0, 0.5 )
 scale = Vector2( 0.3, 1e-005 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 centered = false
 offset = Vector2( -0.5, 0 )
 

@@ -13,7 +13,10 @@ var foo : Array = []
 var main_disk = null
 var has_main_disk : bool = false
 
-const DISK_D = 30
+const DISK_D : float = 30.0
+const MIN_DISK_SPEED : float = 0.05
+
+var in_prepare_mode = true
 
 func _ready() -> void:
 	hide()
@@ -63,9 +66,30 @@ func get_all_disks_from_pool() -> void:
 		add_child(main_disk)
 		has_main_disk = true
 		
+func _process(delta):
+	if in_prepare_mode:
+		return
+		
+	for disk in get_children():
+		if disk.linear_velocity.length() > MIN_DISK_SPEED:
+			return
+			
+	print("STOPPED")
+	enter_preapare_mode()
+		
 func make_everything_rigid() -> void:
 	for disk in get_children():
 		disk.make_rigid()
+		
+	yield(get_tree().create_timer(0.1), "timeout")
+	in_prepare_mode = false
+	print("prepare?")
 	
+		
+func enter_preapare_mode() -> void:
+	for disk in get_children():
+		disk.enter_preapare_mode()
+	
+	in_prepare_mode = true
 	
 	

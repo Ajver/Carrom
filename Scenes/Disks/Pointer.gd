@@ -7,8 +7,8 @@ onready var string_start_position = $StringStartPosition
 
 var is_stringing : bool = false
 
-var MAX_STRENGHT : float = 200.0
-var STRENGHT_MOD : float = 10.0
+var MAX_STRENGHT : float = 300.0
+var STRENGHT_MOD : float = 15.0
 
 func _input(event):
 	if not visible:
@@ -30,6 +30,9 @@ func _input(event):
 		is_stringing = true
 		
 func _process(delta):
+	if not visible:
+		return
+		
 	var mouse_position = get_viewport().get_mouse_position()
 	var diff = mouse_position - global_position
 	var angle = atan2(diff.x, diff.y)

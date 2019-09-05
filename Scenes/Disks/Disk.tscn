@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scenes/Disks/Disk.gd" type="Script" id=1]
-[ext_resource path="res://circle.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Disks/DiskPhysicsMaterial.tres" type="PhysicsMaterial" id=1]
+[ext_resource path="res://Scenes/Disks/Disk.gd" type="Script" id=2]
+[ext_resource path="res://circle.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0
@@ -16,13 +17,15 @@ collision_layer = 2
 collision_mask = 38
 mode = 1
 mass = 0.5
+physics_material_override = ExtResource( 1 )
 continuous_cd = 2
-linear_damp = 1.0
-script = ExtResource( 1 )
+linear_damp = 4.0
+angular_damp = 1.0
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.15, 0.15 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
