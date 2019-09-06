@@ -7,6 +7,8 @@ var on_right_area : bool = true
 onready var area = $Area2D
 onready var pointer = $Pointer
 
+const MAX_POSITION : float = 280.0 
+
 var COLORS = {
 	"valid_area": Color8(255, 255, 255),
 	"wrong_area": Color8(207, 19, 19)
@@ -16,29 +18,29 @@ func _input(event) -> void:
 	if mode == MODE_RIGID:
 		return
 		
-	if Input.is_key_pressed(KEY_Q):
-		area.global_position = Vector2(500, 300)
-		
 	if is_holded:
 		if event is InputEventMouseMotion:
 			global_position = event.position
+			fit_into_board()
 		elif Input.is_action_just_released("grab"):
 			is_holded = false
+			Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 	elif is_mouse_in:
 		if Input.is_action_just_pressed("grab"):
 			is_holded = true
+			Input.set_default_cursor_shape(Input.CURSOR_MOVE)
+			
+func fit_into_board() -> void:
+	position.x = min(MAX_POSITION, position.x)
+	position.x = max(-MAX_POSITION, position.x)
+	position.y = min(MAX_POSITION, position.y)
+	position.y = max(-MAX_POSITION, position.y)
 
 func _physics_process(delta) -> void:
 	var areas = area.get_overlapping_areas()
 	if areas.size() == 0:
 		on_right_area = true
 		modulate = COLORS["valid_area"]
-		#if mode == MODE_KINEMATIC and not is_holded:
-		#	pointer.show()
-		var bodies = area.get_overlapping_bodies()
-		if bodies.size() == 0:
-			# OK!
-			pass
 	else:
 		pointer.hide()
 		on_right_area = false
@@ -48,6 +50,8 @@ func _on_Mouse_entered() -> void:
 	
 	if mode == MODE_RIGID:
 		return
+		
+	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 	
 	pointer.hide()
 
@@ -57,22 +61,18 @@ func _on_Mouse_exited() -> void:
 	if mode == MODE_RIGID:
 		return
 		
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+		
 	if on_right_area:
 		pointer.show()
 
-func _on_Area2D_body_entered(body):
-	_on_wrong_area_entered()
-	
-func _on_Area2D_area_entered(area) -> void:
-	_on_wrong_area_entered()
-
-func _on_wrong_area_entered() -> void:
+func _on_wrong_area_entered(area) -> void:
 	if mode == MODE_RIGID:
 		return
 	
 	modulate = COLORS["wrong_area"]
 
-func _on_wrong_area_exited(area):
+func _on_wrong_area_exited(area) -> void:
 	if mode == MODE_RIGID:
 		return
 		

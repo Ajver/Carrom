@@ -4,7 +4,7 @@ var Disk = load("res://Scenes/Disks/Disk.tscn")
 var MainDisk = load("res://Scenes/Disks/MainDisk.tscn")
 
 const DISKS_COLORS = [
-	Color8(204, 204, 204),
+	Color8(163, 114, 72),
 	Color8(61, 61, 61),
 	Color8(112, 7, 7)
 ]
