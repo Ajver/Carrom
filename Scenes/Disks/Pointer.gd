@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var board = get_node("/root/Board")
+onready var board = get_node("/root/Main").find_node("Board")
 onready var main_disk = get_parent() 
 onready var spring = $SpringBase/Spring
 onready var string_start_position = $StringStartPosition 
