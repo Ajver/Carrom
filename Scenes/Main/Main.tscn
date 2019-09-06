@@ -31,3 +31,4 @@ text = "Caroom"
 align = 1
 
 [node name="Board" parent="." instance=ExtResource( 3 )]
+
