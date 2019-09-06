@@ -7,12 +7,10 @@ var on_right_area : bool = true
 onready var area = $Area2D
 onready var pointer = $Pointer
 
-var previous_position : Vector2
-
-var COLORS = [
-	Color8(110, 237, 231),
-	Color8(110, 237, 182)
-]
+var COLORS = {
+	"valid_area": Color8(255, 255, 255),
+	"wrong_area": Color8(207, 19, 19)
+}
 
 func _input(event) -> void:
 	if mode == MODE_RIGID:
@@ -23,27 +21,24 @@ func _input(event) -> void:
 		
 	if is_holded:
 		if event is InputEventMouseMotion:
-			area.global_position = event.position
+			global_position = event.position
 		elif Input.is_action_just_released("grab"):
 			is_holded = false
-			modulate = COLORS[0]
-			area.position = Vector2.ZERO
 	elif is_mouse_in:
 		if Input.is_action_just_pressed("grab"):
 			is_holded = true
 
-func _physics_process(delta) -> void:		
-	previous_position = global_position
-		
+func _physics_process(delta) -> void:
 	var areas = area.get_overlapping_areas()
 	if areas.size() == 0:
 		on_right_area = true
-		if mode == MODE_KINEMATIC and not is_holded:
-			pointer.show()
+		modulate = COLORS["valid_area"]
+		#if mode == MODE_KINEMATIC and not is_holded:
+		#	pointer.show()
 		var bodies = area.get_overlapping_bodies()
 		if bodies.size() == 0:
-			global_position = area.global_position
-			area.position = Vector2.ZERO
+			# OK!
+			pass
 	else:
 		pointer.hide()
 		on_right_area = false
@@ -54,7 +49,6 @@ func _on_Mouse_entered() -> void:
 	if mode == MODE_RIGID:
 		return
 	
-	modulate = COLORS[1]
 	pointer.hide()
 
 func _on_Mouse_exited() -> void:
@@ -62,9 +56,6 @@ func _on_Mouse_exited() -> void:
 	
 	if mode == MODE_RIGID:
 		return
-		
-	if not is_holded:
-		modulate = COLORS[0]
 		
 	if on_right_area:
 		pointer.show()
@@ -78,9 +69,18 @@ func _on_Area2D_area_entered(area) -> void:
 func _on_wrong_area_entered() -> void:
 	if mode == MODE_RIGID:
 		return
-		
-	global_position = previous_position
+	
+	modulate = COLORS["wrong_area"]
 
+func _on_wrong_area_exited(area):
+	if mode == MODE_RIGID:
+		return
+		
+	if not on_right_area:
+		return
+		
+	modulate = COLORS["valid_area"]
+	
 func is_on_right_area() -> bool:
 	return on_right_area
 
@@ -90,9 +90,11 @@ func make_rigid() -> void:
 	
 func enter_prepare_mode() -> void:
 	mode = MODE_KINEMATIC
-	
-	if is_mouse_in:
-		return
 		
 	if on_right_area:
+		if is_mouse_in:
+			return
 		pointer.show()
+	else:
+		modulate = COLORS["wrong_area"]
+		
