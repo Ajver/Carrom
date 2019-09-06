@@ -22,11 +22,11 @@ func _input(event) -> void:
 		if event is InputEventMouseMotion:
 			global_position = event.position
 			fit_into_board()
-		elif Input.is_action_just_released("grab"):
+		elif Input.is_action_just_released("grab") or (event is InputEventScreenTouch and not event.is_pressed()):
 			is_holded = false
 			Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 	elif is_mouse_in:
-		if Input.is_action_just_pressed("grab"):
+		if Input.is_action_just_pressed("grab") or (event is InputEventScreenTouch and event.is_pressed()):
 			is_holded = true
 			Input.set_default_cursor_shape(Input.CURSOR_MOVE)
 			

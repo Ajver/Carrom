@@ -21,11 +21,11 @@ func _input(event):
 		if event is InputEventMouseMotion:
 			var string_strengt = get_string_strenght()
 			spring.scale.y = string_strengt / 3
-		elif Input.is_action_just_released("grab"):
+		elif Input.is_action_just_released("grab") or (event is InputEventScreenTouch and not event.is_pressed()):
 			shot()
 			is_stringing = false
 			spring.scale.y = 0
-	elif Input.is_action_just_pressed("grab"):
+	elif Input.is_action_just_pressed("grab") or (event is InputEventScreenTouch and event.is_pressed()):
 		string_start_position.global_position = event.position
 		is_stringing = true
 		

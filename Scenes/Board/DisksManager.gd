@@ -19,7 +19,6 @@ var in_prepare_mode = true
 func new_game() -> void:
 	remove_all_children()
 	call_deferred("register_new_disks")
-	#register_new_disks()
 	
 func remove_all_children() -> void:
 	for disk in get_children():
