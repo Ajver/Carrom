@@ -2,6 +2,7 @@ extends RigidBody2D
 
 var is_holded = false
 var is_mouse_in = false
+var on_right_area : bool = true
 
 onready var area = $Area2D
 onready var pointer = $Pointer
@@ -31,21 +32,21 @@ func _input(event) -> void:
 		if Input.is_action_just_pressed("grab"):
 			is_holded = true
 
-func _physics_process(delta) -> void:
-	if mode == MODE_RIGID:
-		return
-		
+func _physics_process(delta) -> void:		
 	previous_position = global_position
-	
-	if area.position == Vector2.ZERO:
-		return
 		
 	var areas = area.get_overlapping_areas()
 	if areas.size() == 0:
+		on_right_area = true
+		if mode == MODE_KINEMATIC and not is_holded:
+			pointer.show()
 		var bodies = area.get_overlapping_bodies()
 		if bodies.size() == 0:
 			global_position = area.global_position
 			area.position = Vector2.ZERO
+	else:
+		pointer.hide()
+		on_right_area = false
 	
 func _on_Mouse_entered() -> void:
 	is_mouse_in = true
@@ -64,7 +65,9 @@ func _on_Mouse_exited() -> void:
 		
 	if not is_holded:
 		modulate = COLORS[0]
-	pointer.show()
+		
+	if on_right_area:
+		pointer.show()
 
 func _on_Area2D_body_entered(body):
 	_on_wrong_area_entered()
@@ -78,6 +81,9 @@ func _on_wrong_area_entered() -> void:
 		
 	global_position = previous_position
 
+func is_on_right_area() -> bool:
+	return on_right_area
+
 func make_rigid() -> void:
 	mode = MODE_RIGID
 	pointer.hide()
@@ -85,5 +91,8 @@ func make_rigid() -> void:
 func enter_prepare_mode() -> void:
 	mode = MODE_KINEMATIC
 	
-	if not is_mouse_in:
+	if is_mouse_in:
+		return
+		
+	if on_right_area:
 		pointer.show()

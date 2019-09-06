@@ -13,8 +13,8 @@ radius = 20.0
 radius = 20.0
 
 [node name="MainDisk" type="RigidBody2D" groups=[
-"main_disk",
 "disks",
+"main_disk",
 ]]
 collision_layer = 4
 collision_mask = 34
