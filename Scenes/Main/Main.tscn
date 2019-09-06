@@ -31,7 +31,7 @@ mouse_filter = 2
 margin_right = 1240.0
 margin_bottom = 97.0
 custom_fonts/font = ExtResource( 2 )
-text = "Caroom"
+text = "Carrom"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
