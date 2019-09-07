@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+var piece_type : String
+
 var pieces_manager = null
 
 func set_pieces_manager(pm):
@@ -14,4 +16,4 @@ func enter_prepare_mode() -> void:
 func _on_Corner_entered(area):
 	if area.is_in_group("corners"):
 		queue_free()
-		pieces_manager.disk_reached(self)
+		pieces_manager.piece_reached(self)

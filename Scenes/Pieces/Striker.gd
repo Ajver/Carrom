@@ -91,7 +91,6 @@ func check_valid_area() -> bool:
 		set_on_valid_area(true)
 	else:
 		set_on_valid_area(false)
-		print(areas)
 		
 	return on_valid_area
 	

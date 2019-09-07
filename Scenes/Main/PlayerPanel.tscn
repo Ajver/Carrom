@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Main/PlayerPanel.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/font_40.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Fonts/font_32.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Assets/Graphics/circle.png" type="Texture" id=4]
 
 [node name="PlayerPanel" type="MarginContainer"]
 margin_right = 1240.0
@@ -33,3 +34,16 @@ margin_right = 1200.0
 margin_bottom = 97.0
 custom_fonts/font = ExtResource( 3 )
 text = "Score: 12"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 117.0
+margin_right = 1200.0
+margin_bottom = 377.0
+custom_constants/margin_top = 60
+
+[node name="PieceTexture" type="TextureRect" parent="VBoxContainer/MarginContainer"]
+margin_top = 60.0
+margin_right = 1200.0
+margin_bottom = 260.0
+texture = ExtResource( 4 )
+stretch_mode = 4

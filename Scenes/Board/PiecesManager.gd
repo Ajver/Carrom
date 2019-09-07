@@ -1,13 +1,15 @@
 extends Node2D
 
+onready var main = get_node("/root/Main")
+
 var Piece = load("res://Scenes/Pieces/Piece.tscn")
 var Striker = load("res://Scenes/Pieces/Striker.tscn")
 
-const DISKS_COLORS = [
-	Color8(163, 114, 72),
-	Color8(61, 61, 61),
-	Color8(112, 7, 7)
-]
+const PIECES_TYPES = {
+	0: [ "white", Color8(163, 114, 72) ],
+	1: [ "black", Color8(61, 61, 61) ],
+	2: [ "queen", Color8(112, 7, 7) ]
+}
 
 const PIECE_D : float = 30.0
 const MIN_DISK_SPEED : float = 0.05
@@ -29,7 +31,7 @@ func remove_all_children() -> void:
 func register_new_pieces() -> void:
 	var SQRT_3 = 1.732
 	
-	create_piece(Vector2.ZERO, DISKS_COLORS[2])
+	create_piece(Vector2.ZERO, PIECES_TYPES[2])
 	create_6_pieces(PIECE_D, 0.0)
 	create_6_pieces(PIECE_D*2, 0.0)
 	create_6_pieces(PIECE_D * SQRT_3, PI / 6.0)
@@ -48,16 +50,17 @@ func create_6_pieces(R:float, angle:float):
 		var x = sin(angle) * R
 		var y = cos(angle) * R
 		
-		create_piece(Vector2(x, y), DISKS_COLORS[i%2])
+		create_piece(Vector2(x, y), PIECES_TYPES[i%2])
 		
 		angle += PI_OVER_3
 		
-func create_piece(piece_position:Vector2, piece_modulate:Color):
+func create_piece(piece_position:Vector2, piece_type:Array):
 	var piece = Piece.instance()
 	add_child(piece)
-	piece.modulate = piece_modulate
-	piece.set_pieces_manager(self)
 	piece.position = piece_position
+	piece.piece_type = piece_type[0]
+	piece.modulate = piece_type[1]
+	piece.set_pieces_manager(self)
 		
 func _process(delta):
 	if in_prepare_mode:
@@ -85,6 +88,6 @@ func enter_prepare_mode() -> void:
 	
 	in_prepare_mode = true
 
-func disk_reached(piece) -> void:
-	#call_deferred("remove_child", piece)
+func piece_reached(piece) -> void:
+	main.piece_reached(piece)
 	pass
