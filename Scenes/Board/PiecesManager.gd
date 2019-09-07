@@ -73,6 +73,9 @@ func make_everything_rigid() -> void:
 	for piece in get_children():
 		piece.make_rigid()
 		
+	for line in snapping_lines:
+		line.is_snapping = false
+		
 	yield(get_tree().create_timer(0.1), "timeout")
 	in_prepare_mode = false
 	

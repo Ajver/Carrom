@@ -6,19 +6,13 @@
 [ext_resource path="res://Scenes/Pieces/Pointer.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Graphics/OnePixel.png" type="Texture" id=5]
 
-
-
-
-
-
-
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 20.0
 
-[node name="MainDisk" type="RigidBody2D" groups=[
+[node name="Striker" type="RigidBody2D" groups=[
 "main_disk",
 "disks",
 ]]
@@ -41,7 +35,7 @@ shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 50
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
@@ -80,8 +74,5 @@ centered = false
 offset = Vector2( -0.5, 0 )
 
 [node name="StringStartPosition" type="Position2D" parent="Pointer"]
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_wrong_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_wrong_area_exited"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Mouse_exited"]
