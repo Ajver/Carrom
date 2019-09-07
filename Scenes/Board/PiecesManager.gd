@@ -6,12 +6,12 @@ var Piece = load("res://Scenes/Pieces/Piece.tscn")
 var Striker = load("res://Scenes/Pieces/Striker.tscn")
 
 const PIECES_TYPES = {
-	0: [ "white", Color8(163, 114, 72) ],
+	0: [ "white", Color8(255, 240, 230) ],
 	1: [ "black", Color8(61, 61, 61) ],
 	2: [ "queen", Color8(112, 7, 7) ]
 }
 
-const PIECE_D : float = 30.0
+const PIECE_D : float = 20.0
 const MIN_DISK_SPEED : float = 0.05
 
 var in_prepare_mode = true
