@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+signal grabbed
+
 var is_holded : bool = false
 var is_mouse_in : bool = false
 var on_valid_area : bool = false setget set_on_valid_area
@@ -15,7 +17,7 @@ var COLORS = {
 	"wrong_area": Color8(207, 19, 19)
 }
 
-func _ready():
+func _ready() -> void:
 	check_valid_area()
 
 func _input(event) -> void:
@@ -34,6 +36,7 @@ func _input(event) -> void:
 			Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 	elif is_mouse_in:
 		if Input.is_action_just_pressed("grab") or (event is InputEventScreenTouch and event.is_pressed()):
+			emit_signal("grabbed")
 			is_holded = true
 			Input.set_default_cursor_shape(Input.CURSOR_MOVE)
 			
@@ -92,7 +95,7 @@ func check_valid_area() -> bool:
 		
 	return on_valid_area
 	
-func set_on_valid_area(value:bool):
+func set_on_valid_area(value:bool) -> void:
 	on_valid_area = value
 	
 	if on_valid_area:

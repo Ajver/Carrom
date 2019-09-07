@@ -14,7 +14,7 @@ var striker = null
 
 const LENGTH = 170
 
-func _input(event):	
+func _input(event) -> void:
 	if not is_snapping:
 		return
 		
@@ -36,19 +36,31 @@ func _input(event):
 			striker.position.y = min(LENGTH, striker.position.y)
 			striker.position.y = max(-LENGTH, striker.position.y)
 	
-func _on_Mouse_entered():
+func _on_Mouse_entered() -> void:
 	is_mouse_in = true
 	
 	if striker.is_holded:
+		snap_striker()
+
+func snap_striker() -> void:
 		is_snapping = true
 		striker.is_snapped_to_line = true
 
-func _on_Mouse_exited():
+func _on_Mouse_exited() -> void:
 	is_mouse_in = false
 	
 	if striker.is_holded:
+		unsnap_striker()
+
+func unsnap_striker() -> void:
 		is_snapping = false
 		striker.is_snapped_to_line = false
 
-func set_striker(st):
+func set_striker(st) -> void:
 	striker = st
+	striker.connect("grabbed", self, "_on_Striker_grabbed")
+	
+func _on_Striker_grabbed() -> void:
+	if is_mouse_in:
+		snap_striker()
+		
