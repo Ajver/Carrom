@@ -51,4 +51,3 @@ margin_left = 920.0
 
 [node name="Board" parent="." instance=ExtResource( 4 )]
 position = Vector2( 642, 420 )
-

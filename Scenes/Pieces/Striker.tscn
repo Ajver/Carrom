@@ -1,10 +1,13 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scenes/Disks/DiskPhysicsMaterial.tres" type="PhysicsMaterial" id=1]
-[ext_resource path="res://Scenes/Disks/MainDisk.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Pieces/PiecePhysicsMaterial.tres" type="PhysicsMaterial" id=1]
+[ext_resource path="res://Scenes/Pieces/Striker.gd" type="Script" id=2]
 [ext_resource path="res://circle.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/Disks/Pointer.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Pieces/Pointer.gd" type="Script" id=4]
 [ext_resource path="res://OnePixel.png" type="Texture" id=5]
+
+
+
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0

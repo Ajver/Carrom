@@ -1,8 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scenes/Disks/DiskPhysicsMaterial.tres" type="PhysicsMaterial" id=1]
-[ext_resource path="res://Scenes/Disks/Disk.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Pieces/PiecePhysicsMaterial.tres" type="PhysicsMaterial" id=1]
+[ext_resource path="res://Scenes/Pieces/Piece.gd" type="Script" id=2]
 [ext_resource path="res://circle.png" type="Texture" id=3]
+
+
+
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0

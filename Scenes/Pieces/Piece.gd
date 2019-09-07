@@ -1,9 +1,9 @@
 extends RigidBody2D
 
-var disk_manager = null
+var pieces_manager = null
 
-func set_disk_manager(dm):
-	disk_manager = dm
+func set_pieces_manager(pm):
+	pieces_manager = pm
 	
 func make_rigid() -> void:
 	mode = MODE_RIGID
@@ -14,4 +14,4 @@ func enter_prepare_mode() -> void:
 func _on_Corner_entered(area):
 	if area.is_in_group("corners"):
 		queue_free()
-		disk_manager.disk_reached(self)
+		pieces_manager.disk_reached(self)

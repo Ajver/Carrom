@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var board = get_node("/root/Main").find_node("Board")
-onready var main_disk = get_parent() 
+onready var striker = get_parent() 
 onready var spring = $SpringBase/Spring
 onready var string_start_position = $StringStartPosition 
 
@@ -56,4 +56,4 @@ func shot():
 	impulse.y = -cos(global_rotation) * string_strengt
 	
 	board.make_everything_rigid()
-	main_disk.apply_central_impulse(impulse)
+	striker.apply_central_impulse(impulse)

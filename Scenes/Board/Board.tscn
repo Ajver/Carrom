@@ -4,7 +4,8 @@
 [ext_resource path="res://OnePixel.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Board/Corner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://circle.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/Board/DisksManager.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Board/PiecesManager.gd" type="Script" id=5]
+
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 275, 495 )
