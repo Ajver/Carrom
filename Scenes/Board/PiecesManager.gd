@@ -13,6 +13,10 @@ const PIECE_D : float = 30.0
 const MIN_DISK_SPEED : float = 0.05
 
 var in_prepare_mode = true
+var snapping_lines : Array
+
+func _ready():
+	snapping_lines = get_tree().get_nodes_in_group("snapping_lines")
 
 func new_game() -> void:
 	remove_all_children()
@@ -33,6 +37,9 @@ func register_new_pieces() -> void:
 	var striker = Striker.instance()
 	add_child(striker)
 	striker.position = Vector2(0, PIECE_D * 5)
+	
+	for line in snapping_lines:
+		line.set_striker(striker)
 	
 func create_6_pieces(R:float, angle:float):
 	var PI_OVER_3 = PI / 3.0

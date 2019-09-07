@@ -49,10 +49,10 @@ pointing/emulate_touch_from_mouse=true
 
 [layer_names]
 
-2d_physics/layer_2="disk"
-2d_physics/layer_3="main_disk"
+2d_physics/layer_2="piece"
+2d_physics/layer_3="striker"
 2d_physics/layer_4="corner"
-2d_physics/layer_5="main_disk_area"
+2d_physics/layer_5="striker_area"
 2d_physics/layer_6="board_edge"
 
 [physics]

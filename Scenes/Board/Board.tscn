@@ -1,25 +1,25 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Board/Board.gd" type="Script" id=1]
-[ext_resource path="res://OnePixel.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/OnePixel.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Board/Corner.tscn" type="PackedScene" id=3]
-[ext_resource path="res://circle.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/Board/PiecesManager.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Graphics/circle.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Board/SnappingLine.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Board/PiecesManager.gd" type="Script" id=6]
 
-
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 275, 495 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 585, 290 )
 
-[sub_resource type="PhysicsMaterial" id=1]
+[sub_resource type="PhysicsMaterial" id=3]
 bounce = 1.0
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 973, 450 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 395, 970 )
 
 [node name="Board" type="Node2D"]
@@ -48,6 +48,7 @@ position = Vector2( -287, 285 )
 rotation = 4.71239
 
 [node name="MainDiskAreaSprite" type="Sprite" parent="."]
+editor/display_folded = true
 modulate = Color( 1, 0.858824, 0.858824, 0.396078 )
 scale = Vector2( 400, 400 )
 texture = ExtResource( 2 )
@@ -60,19 +61,19 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainDiskAreaSprite/MainDiskArea"]
 position = Vector2( -475, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="MainDiskAreaSprite/MainDiskArea"]
 position = Vector2( 475, 5 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="MainDiskAreaSprite/MainDiskArea"]
 position = Vector2( 3, 490 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="MainDiskAreaSprite/MainDiskArea"]
 position = Vector2( 3, -490 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
 [node name="CenterOfBoard" type="Position2D" parent="."]
 
@@ -86,24 +87,39 @@ editor/display_folded = true
 visible = false
 collision_layer = 32
 collision_mask = 0
-physics_material_override = SubResource( 1 )
+physics_material_override = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges"]
 position = Vector2( 5, -750 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Edges"]
 position = Vector2( 0, 750 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Edges"]
 position = Vector2( 693, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Edges"]
 position = Vector2( -697, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
+
+[node name="SnappingLine" parent="." instance=ExtResource( 5 )]
+position = Vector2( -200, 0 )
+line_type = 0
+
+[node name="SnappingLine2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 200, 0 )
+line_type = 0
+
+[node name="SnappingLine3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -200 )
+rotation = 1.5708
+
+[node name="SnappingLine4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, 200 )
+rotation = 1.5708
 
 [node name="DisksManager" type="Node2D" parent="."]
-script = ExtResource( 5 )
-
+script = ExtResource( 6 )

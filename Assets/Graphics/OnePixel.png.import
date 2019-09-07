@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/circle.png-10953cad44a8947fbdd4128a631e9e52.stex"
+path="res://.import/OnePixel.png-9c9198f31d4c8084c1f5228058e9013c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://circle.png"
-dest_files=[ "res://.import/circle.png-10953cad44a8947fbdd4128a631e9e52.stex" ]
+source_file="res://Assets/Graphics/OnePixel.png"
+dest_files=[ "res://.import/OnePixel.png-9c9198f31d4c8084c1f5228058e9013c.stex" ]
 
 [params]
 

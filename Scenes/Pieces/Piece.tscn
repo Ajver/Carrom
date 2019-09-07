@@ -2,7 +2,9 @@
 
 [ext_resource path="res://Scenes/Pieces/PiecePhysicsMaterial.tres" type="PhysicsMaterial" id=1]
 [ext_resource path="res://Scenes/Pieces/Piece.gd" type="Script" id=2]
-[ext_resource path="res://circle.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/circle.png" type="Texture" id=3]
+
+
 
 
 
