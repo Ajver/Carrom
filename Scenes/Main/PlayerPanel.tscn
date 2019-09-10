@@ -26,6 +26,7 @@ custom_constants/separation = 20
 margin_right = 1200.0
 margin_bottom = 43.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Player name"
 
 [node name="Score" type="Label" parent="VBoxContainer"]

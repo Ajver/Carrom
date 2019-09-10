@@ -1,6 +1,9 @@
 extends Node2D
 
+signal piece_reached(piece)
+
 onready var main = get_node("/root/Main")
+onready var rules = main.find_node("Rules")
 
 var Piece = load("res://Scenes/Pieces/Piece.tscn")
 var Striker = load("res://Scenes/Pieces/Striker.tscn")
@@ -18,6 +21,7 @@ var in_prepare_mode = true
 var snapping_lines : Array
 
 func _ready():
+	connect("piece_reached", rules, "_on_Piece_reached")
 	snapping_lines = get_tree().get_nodes_in_group("snapping_lines")
 
 func new_game() -> void:
@@ -56,7 +60,7 @@ func create_6_pieces(R:float, angle:float):
 		
 func create_piece(piece_position:Vector2, piece_type:Array):
 	var piece = Piece.instance()
-	add_child(piece)
+	call_deferred("add_child", piece)
 	piece.position = piece_position
 	piece.piece_type = piece_type[0]
 	piece.modulate = piece_type[1]
@@ -87,7 +91,11 @@ func enter_prepare_mode() -> void:
 		piece.enter_prepare_mode()
 	
 	in_prepare_mode = true
+	
+	rules.next_turn()
 
 func piece_reached(piece) -> void:
-	main.piece_reached(piece)
-	pass
+	emit_signal("piece_reached", piece)
+	
+func restore_queen() -> void:
+	create_piece(Vector2.ZERO, PIECES_TYPES[2])

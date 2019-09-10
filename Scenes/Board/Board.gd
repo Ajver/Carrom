@@ -1,17 +1,19 @@
 extends Node2D
 
-onready var disk_manager = $DisksManager
+onready var pieces_manager = $PiecesManager
+onready var rules = $Rules
 
 func _ready() -> void:
 	new_game()
 
 func new_game() -> void:
-	disk_manager.new_game()
+	pieces_manager.new_game()
+	rules.new_game()
 	
 func _input(event) -> void:
 	if Input.is_key_pressed(KEY_S):
-		disk_manager.enter_prepare_mode()
+		pieces_manager.enter_prepare_mode()
 		new_game()
 		
 func make_everything_rigid() -> void:
-	disk_manager.make_everything_rigid()
+	pieces_manager.make_everything_rigid()

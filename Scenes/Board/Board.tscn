@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Board/Board.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/carrom.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Board/Corner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Board/SnappingLine.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Board/PiecesManager.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Board/Rules.gd" type="Script" id=6]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 1.0
@@ -37,8 +38,6 @@ rotation = 3.14159
 [node name="Corner4" parent="." instance=ExtResource( 3 )]
 position = Vector2( -243.774, 244.39 )
 rotation = 4.71239
-
-[node name="CenterOfBoard" type="Position2D" parent="."]
 
 [node name="Edges" type="StaticBody2D" parent="."]
 editor/display_folded = true
@@ -79,5 +78,8 @@ rotation = 1.5708
 position = Vector2( 0, 188.18 )
 rotation = 1.5708
 
-[node name="DisksManager" type="Node2D" parent="."]
+[node name="PiecesManager" type="Node2D" parent="."]
 script = ExtResource( 5 )
+
+[node name="Rules" type="Node" parent="."]
+script = ExtResource( 6 )
