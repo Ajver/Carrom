@@ -18,3 +18,9 @@ func _on_CreateGameBtn_pressed() -> void:
 func get_player_name() -> String:
 	var player_name_text_enter = find_node("NameEnter")
 	return player_name_text_enter.text
+
+func _on_EN_Flag_pressed():
+	T.set_language("en")
+
+func _on_PL_Flag_pressed():
+	T.set_language("pl")

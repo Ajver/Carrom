@@ -3,6 +3,13 @@ extends Node
 var LANGUAGES_DIRECTORY = "res://Languages/"
 var _texts : Dictionary = {}
 
+func set_language(language:String) -> void:
+	_load_language_file(language)
+	
+	var labels = get_tree().get_nodes_in_group("LanguageLabel")
+	for label in labels:
+		label.update_text()
+
 func get(text_id:String) -> String:
 	if _texts.has(text_id):
 		return _texts[text_id]
