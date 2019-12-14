@@ -1,0 +1,10 @@
+{
+  "lobby.header": "Lobby",
+  "lobby.enterName": "Enter your name",
+  "lobby.createGame": "Create Game",
+  "lobby.createNewGame": "Create new game",
+  "lobby.createGameBtn": "Create game",
+  "lobby.joinGame": "Join Game",
+  "lobby.enterIp": "Enter existing game IP address",
+  "lobby.joinGameBtn": "Join game"
+}

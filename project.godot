@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Network="*res://Scripts/Network.gd"
+T="*res://Scripts/T.gd"
 
 [display]
 
