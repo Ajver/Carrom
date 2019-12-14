@@ -10,7 +10,7 @@ var is_snapped_to_line : bool = false setget set_snapped_to_line
 onready var area = $Area2D
 onready var pointer = $Pointer
 
-const MAX_POSITION : float = 280.0 
+const MAX_POSITION : float = 245.0 
 
 var COLORS = {
 	"valid_area": Color8(255, 255, 255),

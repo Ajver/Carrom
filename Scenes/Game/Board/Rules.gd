@@ -67,6 +67,12 @@ func switch_current_player_color() -> void:
 	get_current_player().set_current()
 	
 func reset(player_color:String) -> void:
+	main = get_node("/root/Main")
+	pieces_manager = main.find_node("PiecesManager")
+	players = {
+		"white": main.find_node("Player1"),
+		"black": main.find_node("Player2")
+	}
 	set_current_player(player_color)
 	
 func set_current_player(player_color:String) -> void:
