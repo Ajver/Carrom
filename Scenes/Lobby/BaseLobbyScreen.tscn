@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/UI/Country_Flag.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Lobby/Textures/poland.png" type="Texture" id=2]
+
+[node name="BaseLobbyScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.188235, 0.188235, 0.188235, 1 )
+
+[node name="LobbyBody" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="FlagsContainer" type="MarginContainer" parent="."]
+editor/display_folded = true
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -126.0
+margin_bottom = 52.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FlagsContainer"]
+margin_top = 20.0
+margin_right = 106.0
+margin_bottom = 52.0
+custom_constants/separation = 10
+
+[node name="EN_Flag" parent="FlagsContainer/HBoxContainer" instance=ExtResource( 1 )]
+language = "en"
+
+[node name="PL_Flag" parent="FlagsContainer/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 58.0
+margin_right = 106.0
+texture_normal = ExtResource( 2 )
+language = "pl"

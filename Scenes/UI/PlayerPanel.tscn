@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/Main/PlayerPanel.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/UI/PlayerPanel.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/font_40.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Fonts/font_32.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/Graphics/circle.png" type="Texture" id=4]

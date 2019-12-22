@@ -1,0 +1,157 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scenes/Lobby/BaseLobbyScreen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Lobby/Lobby.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/UI/GameTitle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/UI/LanguageLabel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Fonts/font_32.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Assets/Fonts/font_24.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Scenes/Lobby/TabContainer.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/UI/LanguageButton.tscn" type="PackedScene" id=8]
+
+[node name="MainLobby" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyBody" index="0"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1260.0
+margin_bottom = 708.0
+rect_pivot_offset = Vector2( 1720, 50 )
+custom_constants/separation = 100
+
+[node name="GameTitle" parent="LobbyBody/VBoxContainer" index="0" instance=ExtResource( 3 )]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyBody/VBoxContainer" index="1"]
+margin_top = 197.0
+margin_right = 1240.0
+margin_bottom = 627.0
+custom_constants/separation = 40
+
+[node name="LobbyHeader" parent="LobbyBody/VBoxContainer/VBoxContainer" index="0" instance=ExtResource( 4 )]
+margin_right = 1240.0
+align = 1
+text_id = "lobby.header"
+
+[node name="CenterContainer3" type="CenterContainer" parent="LobbyBody/VBoxContainer/VBoxContainer" index="1"]
+margin_top = 83.0
+margin_right = 1240.0
+margin_bottom = 180.0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer3" index="0"]
+margin_left = 495.0
+margin_right = 745.0
+margin_bottom = 97.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Name" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer" index="0" instance=ExtResource( 4 )]
+margin_right = 250.0
+align = 1
+text_id = "lobby.enterName"
+sufix = ":"
+
+[node name="NameEnter" type="LineEdit" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer" index="1"]
+margin_top = 53.0
+margin_right = 250.0
+margin_bottom = 97.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+max_length = 16
+
+[node name="CenterContainer" type="CenterContainer" parent="LobbyBody/VBoxContainer/VBoxContainer" index="2"]
+margin_top = 220.0
+margin_right = 1240.0
+margin_bottom = 220.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="LobbyBody/VBoxContainer/VBoxContainer" index="3"]
+margin_top = 260.0
+margin_right = 1240.0
+margin_bottom = 430.0
+
+[node name="TabContainer" type="TabContainer" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer2" index="0"]
+margin_left = 320.0
+margin_right = 920.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 600, 0 )
+custom_fonts/font = ExtResource( 6 )
+script = ExtResource( 7 )
+
+[node name="Create Game" type="MarginContainer" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer2/TabContainer" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 44.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer2/TabContainer/Create Game" index="0"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 582.0
+margin_bottom = 112.0
+custom_constants/separation = 10
+
+[node name="Title" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer2/TabContainer/Create Game/VBoxContainer" index="0" instance=ExtResource( 4 )]
+margin_right = 572.0
+text_id = "lobby.createGame"
+sufix = ":"
+
+[node name="CreateGameBtn" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer2/TabContainer/Create Game/VBoxContainer" index="1" instance=ExtResource( 8 )]
+margin_top = 53.0
+margin_right = 572.0
+margin_bottom = 102.0
+text_id = "lobby.createGameBtn"
+
+[node name="Join Game" type="MarginContainer" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer2/TabContainer" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 44.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer2/TabContainer/Join Game" index="0"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 582.0
+margin_bottom = 166.0
+custom_constants/separation = 10
+
+[node name="Title" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer2/TabContainer/Join Game/VBoxContainer" index="0" instance=ExtResource( 4 )]
+margin_top = 53.0
+margin_right = 572.0
+margin_bottom = 96.0
+text_id = "lobby.enterIp"
+sufix = ":"
+
+[node name="GameIP" type="LineEdit" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer2/TabContainer/Join Game/VBoxContainer" index="1"]
+margin_top = 44.0
+margin_right = 572.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+max_length = 16
+
+[node name="JoinGameBtn" parent="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer2/TabContainer/Join Game/VBoxContainer" index="2" instance=ExtResource( 8 )]
+margin_top = 112.0
+margin_right = 572.0
+margin_bottom = 161.0
+text_id = "lobby.joinGameBtn"
+
+[node name="FlagsContainer" parent="." index="2"]
+editor/display_folded = true
+
+[node name="HBoxContainer" parent="FlagsContainer" index="0"]
+margin_right = 106.0
+[connection signal="pressed" from="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer2/TabContainer/Create Game/VBoxContainer/CreateGameBtn" to="." method="_on_CreateGameBtn_pressed"]
+[connection signal="pressed" from="LobbyBody/VBoxContainer/VBoxContainer/CenterContainer2/TabContainer/Join Game/VBoxContainer/JoinGameBtn" to="." method="_on_JoinGameBtn_pressed"]

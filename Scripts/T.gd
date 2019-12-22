@@ -2,8 +2,13 @@ extends Node
 
 var LANGUAGES_DIRECTORY = "res://Languages/"
 var _texts : Dictionary = {}
+var current_language : String setget set_language
+
+func _ready() -> void:
+	set_language("en")
 
 func set_language(language:String) -> void:
+	current_language = language
 	_load_language_file(language)
 	
 	var labels = get_tree().get_nodes_in_group("LanguageLabel")
