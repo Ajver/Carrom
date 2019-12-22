@@ -10,6 +10,11 @@ var self_data = {
 	score = 0
 }
 
+func _ready() -> void:
+	get_tree().connect("network_peer_disconnected", self, "_player_disconected")
+
+func _player_disconected() -> void:
+	print("Player disconected")
 
 func create_server(player_name) -> void:
 	self_data.name = player_name

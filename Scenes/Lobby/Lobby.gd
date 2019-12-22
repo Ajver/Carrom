@@ -1,5 +1,7 @@
 extends Control
 
+signal create_game_btn_pressed
+
 onready var main = get_node("/root/Main")
 
 func _on_JoinGameBtn_pressed() -> void:
@@ -13,7 +15,7 @@ func get_game_ip() -> String:
 
 func _on_CreateGameBtn_pressed() -> void:
 	Network.create_server(get_player_name())
-	#main.start_game()
+	emit_signal("create_game_btn_pressed")
 	
 func get_player_name() -> String:
 	var player_name_text_enter = find_node("NameEnter")

@@ -1,11 +1,9 @@
 extends Node
 
-onready var main = get_node("/root/Main")
-onready var pieces_manager = main.find_node("PiecesManager")
-onready var players : Dictionary = {
-	"white": main.find_node("Player1"),
-	"black": main.find_node("Player2")
-}
+onready var board = get_parent()
+onready var game : Node
+onready var pieces_manager : Node
+onready var players : Dictionary
 
 var current_player_color : String = "white"
 
@@ -17,6 +15,25 @@ var was_queen_covered : bool
 
 func new_game():
 	reset("white")
+	
+func reset(player_color:String) -> void:
+	game = board.game
+	pieces_manager = board.find_node("PiecesManager")
+	players = {
+		"white": game.find_node("Player1"),
+		"black": game.find_node("Player2")
+	}
+	set_current_player(player_color)
+	reset_all_variables()
+
+func set_current_player(player_color:String) -> void:
+	current_player_color = player_color
+	
+func reset_all_variables() -> void:
+	was_current_player_piece_reached = false
+	was_queen_just_reached = false
+	was_queen_reached_before = false
+	was_queen_covered = false
 
 func _on_Piece_reached(piece) -> void:
 	if piece.piece_type == current_player_color:
@@ -66,22 +83,4 @@ func switch_current_player_color() -> void:
 			
 	get_current_player().set_current()
 	
-func reset(player_color:String) -> void:
-	main = get_node("/root/Main")
-	pieces_manager = main.find_node("PiecesManager")
-	players = {
-		"white": main.find_node("Player1"),
-		"black": main.find_node("Player2")
-	}
-	set_current_player(player_color)
-	
-func set_current_player(player_color:String) -> void:
-	current_player_color = player_color
-	get_current_player().set_current()
-
-func reset_all_variables() -> void:
-	was_current_player_piece_reached = false
-	was_queen_just_reached = false
-	was_queen_reached_before = false
-	was_queen_covered = false
 	

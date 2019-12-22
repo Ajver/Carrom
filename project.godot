@@ -60,6 +60,11 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_5="striker_area"
 2d_physics/layer_6="board_edge"
 
+[network]
+
+limits/debugger_stdout/max_messages_per_frame=60
+limits/debugger_stdout/max_errors_per_frame=60
+
 [physics]
 
 2d/default_gravity_vector=Vector2( 0, 0 )

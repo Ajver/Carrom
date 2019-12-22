@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var board = get_node("/root/Main").find_node("Board")
-onready var striker = get_parent() 
+onready var striker = get_parent()
+onready var board : Node
 onready var spring = $SpringBase/Spring
 onready var string_start_position = $StringStartPosition 
 
@@ -9,6 +9,9 @@ var is_stringing : bool = false
 
 var MAX_STRENGHT : float = 300.0
 var STRENGHT_MOD : float = 15.0
+
+func set_board(n_board:Node) -> void:
+	board = n_board
 
 func _input(event):
 	if not visible:

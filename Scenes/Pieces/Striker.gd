@@ -9,6 +9,7 @@ var is_snapped_to_line : bool = false setget set_snapped_to_line
 
 onready var area = $Area2D
 onready var pointer = $Pointer
+onready var board = get_parent().get_parent()
 
 const MAX_POSITION : float = 245.0 
 
@@ -19,6 +20,7 @@ var COLORS = {
 
 func _ready() -> void:
 	check_valid_area()
+	pointer.set_board(board)
 
 func _input(event) -> void:
 	if mode == MODE_RIGID:

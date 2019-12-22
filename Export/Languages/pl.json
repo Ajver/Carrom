@@ -1,0 +1,10 @@
+{
+  "lobby.header": "Lobby",
+  "lobby.enterName": "Wprowadz swoje imie",
+  "lobby.createGame": "Stworz gre",
+  "lobby.createNewGame": "Stworz nowa gre",
+  "lobby.createGameBtn": "Stworz gre",
+  "lobby.joinGame": "Dolacz Do Gry",
+  "lobby.enterIp": "Wprowadz adres IP istniejacej gry",
+  "lobby.joinGameBtn": "Dolacz do gry"
+}

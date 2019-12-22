@@ -2,8 +2,9 @@ extends Node2D
 
 signal piece_reached(piece)
 
-onready var main = get_node("/root/Main")
-onready var rules = main.find_node("Rules")
+onready var board = get_parent()
+onready var game : Node
+onready var rules : Node
 
 var Piece = load("res://Scenes/Pieces/Piece.tscn")
 var Striker = load("res://Scenes/Pieces/Striker.tscn")
@@ -15,16 +16,21 @@ const PIECES_TYPES = {
 }
 
 const PIECE_D : float = 20.0
-const MIN_DISK_SPEED : float = 0.05
+const MIN_DISK_SPEED : float = 0.01
 
 var in_prepare_mode = true
 var snapping_lines : Array
 
 func _ready():
-	connect("piece_reached", rules, "_on_Piece_reached")
 	snapping_lines = get_tree().get_nodes_in_group("snapping_lines")
 
 func new_game() -> void:
+	game = board.game
+	rules = game.find_node("Rules")
+	
+	if not is_connected("piece_reached", rules, "_on_Piece_reached"):
+		connect("piece_reached", rules, "_on_Piece_reached")
+		
 	remove_all_children()
 	call_deferred("register_new_pieces")
 	
@@ -71,7 +77,8 @@ func _process(delta):
 		return
 		
 	for piece in get_children():
-		if piece.linear_velocity.length() > MIN_DISK_SPEED:
+		if !piece.sleeping and piece.linear_velocity.length_squared() > MIN_DISK_SPEED:
+			print(piece.linear_velocity.length_squared())
 			return
 			
 	enter_prepare_mode()

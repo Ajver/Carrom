@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var game = get_parent()
 onready var pieces_manager = $PiecesManager
 onready var rules = $Rules
 
@@ -8,7 +9,7 @@ func _ready() -> void:
 
 func new_game() -> void:
 	pieces_manager.new_game()
-	rules.new_game()
+	rules.call_deferred("new_game")
 	
 func _input(event) -> void:
 	if Input.is_key_pressed(KEY_S):
